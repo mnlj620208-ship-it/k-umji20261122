@@ -1,0 +1,1314 @@
+/* ==========================================================
+   엄지언니네 웹사이트 스타일시트 (style.css)
+   - 테마: 깔끔한 화이트 + 신뢰감 있는 진 초록색(Deep Forest Green) + 파스텔 톤
+   - 건강보조식품 브랜드에 어울리는 친환경/자연/신뢰 테마
+   - 완전 반응형 (모바일 / 태블릿 / PC 지원)
+   - 인터랙티브 모달 및 토스트 알림 포함
+   ========================================================== */
+
+/* 1. 디자인 시스템 변수 정의 */
+:root {
+  /* 주요 브랜드 색상 (진 초록색 테마) */
+  --color-primary: #18633B;         /* 엄지언니 시그니처 딥 포레스트 그린 (진 초록색) */
+  --color-primary-dark: #0E4728;    /* 더 짙은 진초록 (호버/강조용) */
+  --color-primary-light: #EAF6EE;   /* 싱그럽고 부드러운 연초록 배경 */
+  --color-primary-border: rgba(24, 99, 59, 0.18);
+
+  /* 카카오톡 버튼 색상 */
+  --color-kakao-bg: #FEE500;        /* 카카오톡 노란색 */
+  --color-kakao-text: #191919;      /* 카카오톡 다크 텍스트 */
+  --color-kakao-hover: #FADA0A;     /* 카카오톡 호버 색상 */
+
+  /* 기본 배경 및 텍스트 */
+  --bg-body: #FAFAF7;               /* 눈이 편안한 웜 아이보리/화이트 */
+  --bg-card: #FFFFFF;
+  --text-main: #20242C;             /* 짙은 먹색 (가독성 최적화) */
+  --text-muted: #555E6D;            /* 부드러운 설명글 그레이 */
+  --text-light: #8E97A6;
+
+  /* 상품 카드별 파스텔 포인트 색상 */
+  /* 카드 1: 효소 (따뜻한 피치 오렌지 & 베이지) */
+  --product-1-bg: #FFF8F2;
+  --product-1-border: #FFE4D1;
+  --product-1-point: #D96B27;
+  --product-1-badge: #FFF0E3;
+
+  /* 카드 2: 생홍삼환 (품격 있는 프리미엄 골드 & 웜 앰버) */
+  --product-2-bg: #FDF9F2;
+  --product-2-border: #EEDBC2;
+  --product-2-point: #8C4818;
+  --product-2-badge: #FDF2E2;
+
+  /* 카드 3: 다이어트 (산뜻한 로즈 핑크) */
+  --product-3-bg: #FFF3F5;
+  --product-3-border: #FFD4DC;
+  --product-3-point: #D93664;
+  --product-3-badge: #FFE6EB;
+
+  /* 그림자 효과 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.08);
+  --shadow-floating: 0 10px 25px rgba(254, 229, 0, 0.45);
+
+  /* 곡률 */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* 트랜지션 */
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. 리셋 및 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* 컨테이너 */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 섹션 공통 타이틀 */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+  border: 1px solid var(--color-primary-border);
+}
+
+.section-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   3. 상단 헤더 (Header)
+   ========================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 86px;
+}
+
+/* 브랜드 로고 */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.brand-logo:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+/* 상단 상호 앞 원형 캐릭터 프레임 */
+.logo-circle-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 4px 14px rgba(24, 99, 59, 0.25);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.logo-circle-frame img.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-logo:hover .logo-circle-frame {
+  transform: scale(1.08) rotate(4deg);
+  border-color: #22C55E;
+  box-shadow: 0 6px 18px rgba(24, 99, 59, 0.35);
+}
+
+.logo-fallback {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #18633B, #0E4728);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(24, 99, 59, 0.25);
+}
+
+/* 상단 로고 텍스트: 1.5배 확대 (1.4rem -> 2.1rem) */
+.brand-name {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* 네비게이션 메뉴 */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4B5563;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.nav-link.highlight {
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  font-weight: 700;
+}
+
+.nav-link.highlight:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================
+   4. 메인 배너 (Hero Section)
+   ========================================================== */
+.hero-section {
+  position: relative;
+  padding: 70px 0 90px;
+  background: linear-gradient(145deg, #EDF7F1 0%, #FFFDF9 50%, #F1FAF8 100%);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-content {
+  flex: 1.2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  border: 1px solid var(--color-primary-border);
+}
+
+.hero-title {
+  font-size: 2.85rem;
+  font-weight: 850;
+  line-height: 1.28;
+  color: #1F242E;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+/* 사용자가 요청한 '엄지언니네' 진 초록색 하이라이트 (1.5배 강조) */
+.hero-brand-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  vertical-align: middle;
+}
+
+.hero-character-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 4px 14px rgba(24, 99, 59, 0.25);
+  background-color: #FFFFFF;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.hero-character-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-title .highlight-text {
+  color: var(--color-primary);
+  position: relative;
+  display: inline-block;
+  font-weight: 950;
+  font-size: 1.25em;
+  letter-spacing: -0.01em;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 580px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* 카카오톡 버튼 스타일 공통 */
+.btn-kakao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 16px 32px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 18px rgba(254, 229, 0, 0.45);
+  transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-kakao:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(254, 229, 0, 0.55);
+}
+
+.btn-kakao:active {
+  transform: translateY(0);
+}
+
+.kakao-icon {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* 히어로 우측 비주얼 */
+.hero-visual {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-card-preview {
+  position: relative;
+  background: #FFFFFF;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+}
+
+.hero-card-img-wrap {
+  width: 100%;
+  height: 260px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #F4FAF6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.hero-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hero-card-caption {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.hero-card-sub {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* 플로팅 배지 장식 */
+.floating-tag {
+  position: absolute;
+  background: #FFFFFF;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: floatUpDown 3s ease-in-out infinite alternate;
+}
+
+.floating-tag.tag-1 {
+  top: 10px;
+  left: -20px;
+  color: #10B981;
+}
+
+.floating-tag.tag-2 {
+  bottom: 20px;
+  right: -15px;
+  color: var(--color-primary);
+  animation-delay: 1.5s;
+}
+
+@keyframes floatUpDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+/* ==========================================================
+   5. 브랜드 특징 (Brand Features)
+   ========================================================== */
+.features-section {
+  padding: 90px 0;
+  background-color: #FFFFFF;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.feature-card {
+  background-color: var(--bg-body);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-border);
+}
+
+.feature-icon-wrap {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: var(--transition);
+}
+
+.feature-card:nth-child(1) .feature-icon-wrap {
+  background-color: #E8F8F5;
+  color: #0E9F6E;
+}
+
+.feature-card:nth-child(2) .feature-icon-wrap {
+  background-color: #EBF7EE;
+  color: var(--color-primary);
+}
+
+.feature-card:nth-child(3) .feature-icon-wrap {
+  background-color: #EFF6FF;
+  color: #2563EB;
+}
+
+.feature-card:hover .feature-icon-wrap {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.feature-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.feature-desc {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ==========================================================
+   6. 대표 상품 소개 (Product Cards)
+   ========================================================== */
+.products-section {
+  padding: 90px 0 100px;
+  background-color: var(--bg-body);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* 공통 상품 카드 */
+.product-card {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  border: 1.5px solid transparent;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 카드 상단 이미지 및 일러스트 영역 */
+.product-media {
+  position: relative;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.product-illustration {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.product-illustration svg,
+.product-illustration img {
+  max-height: 190px;
+  object-fit: contain;
+  transition: var(--transition);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.08));
+}
+
+.product-card:hover .product-illustration svg,
+.product-card:hover .product-illustration img {
+  transform: scale(1.06);
+}
+
+.product-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  border-radius: var(--radius-full);
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+}
+
+/* 상품 카드 본문 */
+.product-body {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+
+.product-desc {
+  font-size: 1.02rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.product-btn-wrap {
+  margin-top: auto;
+}
+
+.btn-product-kakao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 20px;
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(254, 229, 0, 0.35);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-product-kakao:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(254, 229, 0, 0.45);
+}
+
+.btn-product-kakao:active {
+  transform: translateY(0);
+}
+
+/* 개별 카드 포인트 색상 및 테마 */
+/* 1. 효소 카드 */
+.card-enzyme {
+  border-color: var(--product-1-border);
+}
+.card-enzyme .product-media {
+  background: linear-gradient(145deg, #FFF6EE, #FFEFE2);
+}
+.card-enzyme .product-tag {
+  background-color: var(--product-1-badge);
+  color: var(--product-1-point);
+}
+.card-enzyme .product-name {
+  color: #B45309;
+}
+
+/* 2. 생홍삼환 카드 (프리미엄 웜 앰버 & 골드) */
+.card-ginseng,
+.card-vitamin {
+  border-color: var(--product-2-border);
+}
+.card-ginseng .product-media,
+.card-vitamin .product-media {
+  background: linear-gradient(145deg, #FBF6EE, #F5EADB);
+}
+.card-ginseng .product-tag,
+.card-vitamin .product-tag {
+  background-color: var(--product-2-badge);
+  color: var(--product-2-point);
+}
+.card-ginseng .product-name,
+.card-vitamin .product-name {
+  color: #78350F;
+}
+
+/* 실제 제품 사진 스타일링 */
+.product-illustration img.product-photo {
+  max-height: 185px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.16));
+  transition: var(--transition);
+}
+
+.product-card:hover .product-illustration img.product-photo {
+  transform: scale(1.08) translateY(-4px);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.22));
+}
+
+/* 3. 다이어트 카드 */
+.card-diet {
+  border-color: var(--product-3-border);
+}
+.card-diet .product-media {
+  background: linear-gradient(145deg, #FFF0F3, #FFE4E8);
+}
+.card-diet .product-tag {
+  background-color: var(--product-3-badge);
+  color: var(--product-3-point);
+}
+.card-diet .product-name {
+  color: #BE185D;
+}
+
+/* ==========================================================
+   7. 카카오톡 문의 배너 (CTA Section)
+   ========================================================== */
+.contact-banner-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #EDF8F2 0%, #F5FBF7 50%, #E8F5EE 100%);
+  position: relative;
+  border-top: 1px solid var(--color-primary-border);
+  border-bottom: 1px solid var(--color-primary-border);
+}
+
+.contact-box {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 56px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 820px;
+  margin: 0 auto;
+  border: 1px solid var(--color-primary-border);
+  position: relative;
+}
+
+.contact-box-badge {
+  display: inline-block;
+  padding: 7px 18px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+  border: 1px solid var(--color-primary-border);
+}
+
+.contact-title {
+  font-size: 2.2rem;
+  font-weight: 850;
+  color: var(--text-main);
+  line-height: 1.35;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.contact-desc {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.btn-kakao-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  font-size: 1.25rem;
+  font-weight: 850;
+  padding: 20px 48px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 26px rgba(254, 229, 0, 0.5);
+  transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-kakao-large:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(254, 229, 0, 0.65);
+}
+
+.btn-kakao-large:active {
+  transform: translateY(0);
+}
+
+.btn-kakao-large .kakao-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.contact-guide-note {
+  font-size: 0.88rem;
+  color: #9CA3AF;
+  margin-top: 18px;
+}
+
+/* ==========================================================
+   8. 하단 푸터 (Footer)
+   ========================================================== */
+.site-footer {
+  background-color: #1A2420;        /* 짙은 포레스트 다크 그레이 */
+  color: #D1D5DB;
+  padding: 40px 0;
+  font-size: 0.95rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.footer-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  line-height: 1.6;
+}
+
+.footer-info strong {
+  color: #4ADE80;                   /* 푸터 내 포인트 그린 */
+}
+
+.footer-info span.divider {
+  color: #4B5563;
+}
+
+.footer-copy {
+  color: #9CA3AF;
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+/* ==========================================================
+   9. 우하단 고정 플로팅 카톡 버튼 (Floating Kakao Button)
+   ========================================================== */
+.floating-kakao-btn {
+  position: fixed;
+  right: 26px;
+  bottom: 26px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  font-weight: 800;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-floating);
+  transition: var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  animation: pulseButton 2.5s infinite;
+  cursor: pointer;
+  user-select: none;
+}
+
+.floating-kakao-btn:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 14px 30px rgba(254, 229, 0, 0.65);
+}
+
+.floating-kakao-btn .kakao-icon {
+  width: 22px;
+  height: 22px;
+}
+
+@keyframes pulseButton {
+  0% {
+    box-shadow: 0 0 0 0 rgba(254, 229, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(254, 229, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(254, 229, 0, 0);
+  }
+}
+
+/* ==========================================================
+   10. 인터랙티브 모달 팝업 & 토스트 (Modal & Toast)
+   ========================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(14, 27, 20, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-window {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--color-primary-border);
+}
+
+.modal-backdrop.is-open .modal-window {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 26px 16px;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-character-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-primary);
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(24, 99, 59, 0.2);
+  flex-shrink: 0;
+}
+
+.modal-character-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #F3F4F6;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+  background-color: #E5E7EB;
+  color: var(--text-main);
+}
+
+.modal-content-area {
+  padding: 24px 26px 30px;
+}
+
+.modal-product-notice {
+  background: #F0F9F3;
+  border: 1px solid #C6E9D3;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-desc-text {
+  font-size: 1rem;
+  color: #4B5563;
+  margin-bottom: 24px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.modal-btn-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: var(--radius-md);
+  font-size: 1.05rem;
+  font-weight: 800;
+  transition: var(--transition);
+}
+
+.btn-openchat {
+  background-color: var(--color-kakao-bg);
+  color: var(--color-kakao-text);
+  box-shadow: 0 4px 12px rgba(254, 229, 0, 0.4);
+}
+
+.btn-openchat:hover {
+  background-color: var(--color-kakao-hover);
+  transform: translateY(-2px);
+}
+
+.btn-copy-id {
+  background-color: #F3F4F6;
+  color: #374151;
+  border: 1px solid #E5E7EB;
+}
+
+.btn-copy-id:hover {
+  background-color: #E5E7EB;
+  color: #111827;
+}
+
+.btn-call {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.btn-call:hover {
+  background-color: #D1FAE5;
+}
+
+/* 토스트 메시지 */
+.toast-notice {
+  position: fixed;
+  bottom: 86px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: #11281A;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.toast-notice.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================
+   11. 반응형 미디어 쿼리 (Responsive Web)
+   ========================================================== */
+@media (max-width: 992px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    width: 100%;
+  }
+
+  .features-grid,
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-grid .feature-card:last-child {
+    grid-column: span 2;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .products-grid .product-card:last-child {
+    grid-column: span 2;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    height: 74px;
+  }
+
+  .logo-circle-frame {
+    width: 48px;
+    height: 48px;
+    border-width: 2.5px;
+  }
+
+  /* 모바일 상단 로고 텍스트: 1.5배 확대 (1.2rem -> 1.8rem) */
+  .brand-name {
+    font-size: 1.8rem;
+  }
+
+  .hero-brand-line {
+    gap: 8px;
+  }
+
+  .hero-character-circle {
+    width: 44px;
+    height: 44px;
+    border-width: 2.5px;
+  }
+
+  .nav-menu {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 0.88rem;
+  }
+
+  .hero-section {
+    padding: 45px 0 60px;
+  }
+
+  .hero-title {
+    font-size: 1.95rem;
+    line-height: 1.32;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+  }
+
+  .btn-kakao {
+    width: 100%;
+    padding: 15px 24px;
+    font-size: 1.05rem;
+  }
+
+  .floating-tag {
+    display: none;
+  }
+
+  .features-section,
+  .products-section,
+  .contact-banner-section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .section-desc {
+    font-size: 0.98rem;
+  }
+
+  .features-grid,
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .features-grid .feature-card:last-child,
+  .products-grid .product-card:last-child {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  .contact-box {
+    padding: 40px 20px;
+  }
+
+  .contact-title {
+    font-size: 1.7rem;
+  }
+
+  .contact-desc {
+    font-size: 1.02rem;
+  }
+
+  .btn-kakao-large {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 1.1rem;
+  }
+
+  .footer-info {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-info span.divider {
+    display: none;
+  }
+
+  .floating-kakao-btn {
+    right: 18px;
+    bottom: 18px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  .modal-window {
+    max-width: 100%;
+  }
+}
